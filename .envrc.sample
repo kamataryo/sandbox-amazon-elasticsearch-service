@@ -1,0 +1,4 @@
+export AWS_REGION=ap-xxxx-n
+export AWS_ACCESS_KEY_ID=yyyyyyyyyy
+export AWS_SECRET_ACCESS_KEY=zzzzzzzzzz
+export AMAZON_ES_DOMAIN_NAME=<your-domain>

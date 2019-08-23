@@ -1,0 +1,45 @@
+service: geolonia-geojson-search-api
+
+frameworkVersion: '>=1.29.2 <2.0.0'
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  memorySize: 256
+  region: ap-northeast-1
+  stage: dev
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - es:*
+      Resource:
+        - Fn::Join:
+            - ':'
+            - - arn:aws:es
+              - ${self:provider.region}
+              - Ref: 'AWS::AccountId'
+              - domain/${env:AMAZON_ES_DOMAIN}/*
+
+package:
+  exclude:
+    - .circleci/**
+    - .git/**
+    - src/**
+    - .*
+    - package-lock.json
+    - yarn.lock
+    - package.json
+    - README.md
+    - tsconfig.json
+
+functions:
+  put:
+    handler: dist/put.handler
+    events:
+      - http:
+          path: sources
+          method: post
+          integration: lambda
