@@ -1,4 +1,4 @@
-service: geolonia-geojson-search-api
+service: geojson-search-api
 
 frameworkVersion: '>=1.29.2 <2.0.0'
 
